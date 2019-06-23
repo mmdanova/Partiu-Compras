@@ -1,6 +1,7 @@
 package com.example.partiucompras;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,8 +46,8 @@ public class MainActivity extends AppCompatActivity
         Lista b = new Lista("minhaLista22");
         listas.add(a);
         listas.add(b);
-//simple_list_item_multiple_choice select_dialog_multichoice
-        AdapterView.OnItemLongClickListener itemClickListener= new AdapterView.OnItemLongClickListener() {
+
+/*        AdapterView.OnItemLongClickListener itemClickListener= new AdapterView.OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> listView,
                                            View view,
                                            int position,
@@ -65,10 +66,15 @@ public class MainActivity extends AppCompatActivity
                         }).setNegativeButton(android.R.string.no, null).show();
                 return true;
             }
-        };
+        };*/
         //listagemListas.setOnItemLongClickListener(itemClickListener);
 
-
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String value = extras.getString("key");
+            Lista lista = new Lista(value);
+            listas.add(lista);
+        }
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -142,10 +148,8 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void onCheckboxClicked(View view) {
-        // Is the view now checked?
-        boolean checked = ((CheckBox) view).isChecked();
-
-
+    public void incluirLista(View view) {
+        startActivityForResult( new Intent(this, ListaActivity.class), 1);
     }
+
 }

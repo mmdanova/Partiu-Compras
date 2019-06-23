@@ -1,16 +1,22 @@
 <resources>
+    <!--Genéricos-->
     <string name="app_name">PartiuCompras</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="salvar">Salvar</string>
+    <string name="nav_header_title">Partiu Compras</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Partiu Compras</string>
-    <!--<string name="nav_header_subtitle">android.studio@android.com</string>-->
     <string name="nav_header_desc">Navigation header</string>
-    <!--<string name="action_settings">Settings</string>-->
 
-    <string name="menu_home">Listas</string>
-    <string name="menu_gallery">Produtos</string>
-    <string name="menu_slideshow">Histórico de Compras</string>
-    <!--<string name="menu_tools">Tools</string>-->
-    <!--<string name="menu_share">Share</string>-->
-    <!--<string name="menu_send">Send</string>-->
+    <!--Lista-->
+    <string name="app_nome_nova_lista">Nova Lista</string>
+    <string name="edit_nova_lista">Nome nova lista</string>
+
+    <!--Menu de Navegação-->
+    <string name="menu_listas">Listas</string>
+    <string name="menu_produtos">Produtos</string>
+    <string name="menu_historico_compras">Histórico de Compras</string>
+
+
+
 </resources>
