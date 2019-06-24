@@ -145,7 +145,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_listas) {
             // Handle the camera action
         } else if (id == R.id.nav_produtos) {
-
+            Intent intencao = new Intent(MainActivity.this, FormularioProdutos.class);
+            startActivity(intencao);
         } else if (id == R.id.nav_historico_compras) {
 
         }
@@ -153,6 +154,8 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+    public void abrirTelaProduto() {
 
+    }
 
 }

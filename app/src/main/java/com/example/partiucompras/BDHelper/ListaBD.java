@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class ListaBD extends SQLiteOpenHelper {
 
         public static final String DATABASE = "bd_partiucompras";
-        public static final int VERSION = 1;
+        public static final Integer VERSION = 1;
 
         public ListaBD(Context context) {
             super(context, DATABASE, null, VERSION);

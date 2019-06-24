@@ -9,7 +9,8 @@
             android:title="@string/menu_listas" />
         <item
             android:id="@+id/nav_produtos"
-            android:title="@string/menu_produtos" />
+            android:title="@string/menu_produtos"
+            />
         <item
             android:id="@+id/nav_historico_compras"
             android:title="@string/menu_historico_compras" />
