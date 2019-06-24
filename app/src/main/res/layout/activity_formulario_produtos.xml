@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormularioProdutos">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nome do Produto"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="268dp" />
+
+        <EditText
+            android:id="@+id/editText_nome_produto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="nome do produto"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="287dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Categoria"
+            tools:layout_editor_absoluteX="59dp"
+            tools:layout_editor_absoluteY="249dp" />
+
+        <EditText
+            android:id="@+id/editText_nome_categoria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="nome da categoria"
+            android:inputType="textPersonName"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="108dp" />
+
+        <Button
+            android:id="@+id/button_cancelar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancelar"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="153dp" />
+
+        <Button
+            android:id="@+id/button_salvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/salvar"
+            tools:layout_editor_absoluteX="52dp"
+            tools:layout_editor_absoluteY="201dp" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

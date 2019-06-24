@@ -1,18 +1,24 @@
-package com.example.partiucompras;
+package com.example.partiucompras.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Lista {
+public class Lista implements Serializable {
 
+    private Long id;
     private String nome;
     private Boolean situacao;
-    private Integer quantidade;
     private Date encerramento;
     private ArrayList<Produto> listaProdutos;
 
-    public Lista(String nome) {
-        this.nome = nome;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -29,14 +35,6 @@ public class Lista {
 
     public void setSituacao(Boolean situacao) {
         this.situacao = situacao;
-    }
-
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
     }
 
     public Date getEncerramento() {

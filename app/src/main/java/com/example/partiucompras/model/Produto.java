@@ -1,13 +1,18 @@
-package com.example.partiucompras;
+package com.example.partiucompras.model;
 
 public class Produto {
 
+    private Long id;
     private String nome;
     private String categoria;
+    private Integer quantidade;
 
-    public Produto(String nome, String categoria) {
-        this.nome = nome;
-        this.categoria = categoria;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -24,5 +29,13 @@ public class Produto {
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 }

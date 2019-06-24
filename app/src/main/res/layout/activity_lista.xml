@@ -23,12 +23,12 @@
             android:gravity="center"
             android:layout_marginTop="30dp">
                 <Button
-                        android:id="@+id/cancelarLista"
+                        android:id="@+id/idCancelarLista"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="@string/cancelar"/>
                 <Button
-                        android:id="@+id/salvarLista"
+                        android:id="@+id/idSalvarLista"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="@string/salvar"/>

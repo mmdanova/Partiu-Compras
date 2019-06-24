@@ -1,11 +1,9 @@
 package com.example.partiucompras;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
+import android.view.ContextMenu;
 import android.view.View;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,20 +13,23 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
+import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.partiucompras.BDHelper.ListaBD;
+import com.example.partiucompras.model.Lista;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private ListView listagemListas;
+    private ListaBD bdHelperLista;
     private ArrayList<Lista> listas;
+    private Lista lista;
     private ArrayAdapter arrayAdapter;
 
     @Override
@@ -36,55 +37,49 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Pegando as view
         listagemListas = (ListView) findViewById(R.id.idListagemListas);
+        Button btnIncluirLista = (Button) findViewById(R.id.btnIncluirLista);
+        registerForContextMenu(listagemListas);
 
-        listas = new ArrayList<>();
-        arrayAdapter = new ArrayAdapter(this,
-                android.R.layout.simple_list_item_multiple_choice, listas);
-        listagemListas.setAdapter(arrayAdapter);
-        Lista a = new Lista("minhaLista");
-        Lista b = new Lista("minhaLista22");
-        listas.add(a);
-        listas.add(b);
-
-/*        AdapterView.OnItemLongClickListener itemClickListener= new AdapterView.OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> listView,
-                                           View view,
-                                           int position,
-                                           long id) {
-                final int localPosition = position;
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Remover Lista")
-                        .setMessage("Você realmente deseja remover a lista selecionada?")
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                listas.remove(localPosition);
-                                arrayAdapter.notifyDataSetChanged();
-                            }
-                        }).setNegativeButton(android.R.string.no, null).show();
-                return true;
+        //
+        listagemListas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
+                lista = (Lista) adapter.getItemAtPosition(position);
+                return false;
             }
-        };*/
-        //listagemListas.setOnItemLongClickListener(itemClickListener);
+        });
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String value = extras.getString("key");
-            Lista lista = new Lista(value);
-            listas.add(lista);
-        }
+        // Ao clicar no botão de Incluir, o método abaixo é executado.
+        btnIncluirLista.setOnClickListener(new android.view.View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListaActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        // Abrindo a tela para modificar o item da lista
+        listagemListas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Lista listaEscolhida = (Lista) adapter.getItemAtPosition(position);
+                Intent i = new Intent(MainActivity.this, ListaActivity.class);
+                i.putExtra("lista_escolhida", listaEscolhida);
+                startActivity(i);
+            }
+        });
 
+        // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //startActivityForResult( new Intent(this, ListaActivity.class), 1);
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -94,6 +89,41 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    //Deleta a lista selecionada com o clique longo
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem menuDelete = menu.add("Deletar esta lista");
+
+        menuDelete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                bdHelperLista = new ListaBD(MainActivity.this);
+                bdHelperLista.deletarLista(lista);
+                bdHelperLista.close();
+                carregarLista();
+                return true;
+            }
+        });
+
+    }
+
+    //Carregar lista automaticamente
+    protected void onResume() {
+        super.onResume();
+        carregarLista();
+    }
+
+    //Lista as listas
+    public void carregarLista() {
+        bdHelperLista = new ListaBD(MainActivity.this);
+        listas = bdHelperLista.getLista();
+        bdHelperLista.close();
+        if (listas != null) {
+            arrayAdapter = new ArrayAdapter<Lista>(MainActivity.this, android.R.layout.simple_list_item_1, listas);
+            listagemListas.setAdapter(arrayAdapter);
+        }
     }
 
     @Override
@@ -106,31 +136,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    // Esse é o menu de 3 pontinhos
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
 
-// Esse menu de configurações, que é o que fica dentro do menu de cima
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
-////        if (id == R.id.action_settings) {
-////            return true;
-////        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
@@ -148,8 +154,5 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void incluirLista(View view) {
-        startActivityForResult( new Intent(this, ListaActivity.class), 1);
-    }
 
 }
