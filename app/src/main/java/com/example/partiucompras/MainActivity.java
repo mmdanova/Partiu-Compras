@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.example.partiucompras.BDHelper.ListaBD;
 import com.example.partiucompras.model.Lista;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity
@@ -145,17 +146,15 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_listas) {
             // Handle the camera action
         } else if (id == R.id.nav_produtos) {
-            Intent intencao = new Intent(MainActivity.this, FormularioProdutos.class);
-            startActivity(intencao);
+            Intent intencao = new Intent(MainActivity.this, ListarProduto.class);
+            //Erro ao listar os produtos. Necessario verificar
+            //startActivity(intencao);
         } else if (id == R.id.nav_historico_compras) {
 
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-    public void abrirTelaProduto() {
-
     }
 
 }

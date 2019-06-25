@@ -1,11 +1,12 @@
 package com.example.partiucompras.model;
 
-public class Produto {
+import java.io.Serializable;
+
+public class Produto implements Serializable {
 
     private Long id;
     private String nome;
     private String categoria;
-    private Integer quantidade;
 
     public Long getId() {
         return id;
@@ -31,11 +32,4 @@ public class Produto {
         this.categoria = categoria;
     }
 
-    public Integer getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(Integer quantidade) {
-        this.quantidade = quantidade;
-    }
 }

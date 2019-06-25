@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.partiucompras.model.Lista;
 import com.example.partiucompras.model.Produto;
 
 import java.util.ArrayList;
@@ -58,7 +56,7 @@ public class ProdutoBD extends SQLiteOpenHelper {
     }
 
     public ArrayList<Produto> getProduto() {
-        String [] colunas ={"idProduto","nome", "categoria"};
+        String [] colunas ={"idProduto","nome","categoria"};
         Cursor cursor = getWritableDatabase().query("PRODUTO", colunas, null, null, null,null,null);
         ArrayList<Produto> arrayProduto = new ArrayList<Produto>();
 
@@ -66,6 +64,7 @@ public class ProdutoBD extends SQLiteOpenHelper {
             Produto produto = new Produto();
             produto.setId(cursor.getLong(0));
             produto.setNome(cursor.getString(1));
+            produto.setCategoria(cursor.getString(2));
             arrayProduto.add(produto);
         }
         return arrayProduto;

@@ -13,7 +13,7 @@ import com.example.partiucompras.model.Lista;
 public class ListaActivity extends AppCompatActivity {
 
 
-    public static final String nomeDaNovaLista = null;
+//    public static final String nomeDaNovaLista = null;
 
     private Button btnSalvar;
     private Button btnCancelar;

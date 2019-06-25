@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FormularioProdutos"></activity>
+        <activity
+            android:name=".ListarProduto"
+            android:label="@string/title_activity_listar_produto"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".FormularioProdutos" />
         <activity
             android:name=".ListaActivity"
             android:label="@string/app_nome_nova_lista" />
