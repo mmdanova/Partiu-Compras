@@ -37,6 +37,7 @@ public class FormularioProdutos extends AppCompatActivity {
 
         editarProduto = (Produto) intent.getSerializableExtra("produto_escolhido");
 
+
         btnSalvar = (Button)findViewById(R.id.idSalvarProduto);
         btnCancelar = (Button)findViewById(R.id.idCancelarProduto);
         editTextNomeProduto = (EditText) findViewById(R.id.idEditTextNomeProduto);
@@ -55,14 +56,15 @@ public class FormularioProdutos extends AppCompatActivity {
         btnSalvar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                produto.setNome(editTextCategoriaProduto.getText().toString());
+                produto.setNome(editTextNomeProduto.getText().toString());
+                produto.setCategoria(editTextCategoriaProduto.getText().toString());
 
                 if(btnSalvar.getText().toString().equals("Cadastrar")) {
                     bdHelperProduto.salvarProduto(produto);
-                    bdHelperProduto.close();
+                    //bdHelperProduto.close();
                 } else {
                     bdHelperProduto.alterarProduto(produto);
-                    bdHelperProduto.close();
+                    //bdHelperProduto.close();
                 }
                 finish();
             }

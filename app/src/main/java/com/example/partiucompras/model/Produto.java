@@ -32,4 +32,7 @@ public class Produto implements Serializable {
         this.categoria = categoria;
     }
 
+    public String toString() {
+        return nome;
+    }
 }

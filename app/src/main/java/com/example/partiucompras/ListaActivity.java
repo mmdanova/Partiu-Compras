@@ -55,10 +55,10 @@ public class ListaActivity extends AppCompatActivity {
 
                 if(btnSalvar.getText().toString().equals("Cadastrar")) {
                     bdHelper.salvarLista(lista);
-                    bdHelper.close();
+                  //  bdHelper.close();
                 } else {
                     bdHelper.alterarLista(lista);
-                    bdHelper.close();
+                    //bdHelper.close();
                 }
                 finish();
             }

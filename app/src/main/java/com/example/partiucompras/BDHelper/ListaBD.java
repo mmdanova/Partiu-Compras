@@ -4,30 +4,17 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import com.example.partiucompras.model.Lista;
 import java.util.ArrayList;
 
-public class ListaBD extends SQLiteOpenHelper {
+public class ListaBD {
 
-        public static final String DATABASE = "bd_partiucompras";
-        public static final Integer VERSION = 1;
+    private HelperDao dao;
+    private SQLiteDatabase banco;
 
-        public ListaBD(Context context) {
-            super(context, DATABASE, null, VERSION);
-        }
-
-
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        String query_create_tab_lista = "CREATE TABLE LISTA(idLista INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, nome TEXT NOT NULL);";
-        db.execSQL(query_create_tab_lista);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String query_drop_tab_lista = "DROP TABLE IF EXISTS LISTA";
-         db.execSQL(query_drop_tab_lista);
+    public ListaBD(Context context) {
+        dao = new HelperDao(context);
+        banco = dao.getWritableDatabase();
     }
 
     public void salvarLista(Lista lista) {
@@ -35,7 +22,7 @@ public class ListaBD extends SQLiteOpenHelper {
 
         values.put("nome", lista.getNome());
 
-        getWritableDatabase().insert("lista",null, values);
+        dao.getWritableDatabase().insert("lista",null, values);
 
     }
 
@@ -45,17 +32,17 @@ public class ListaBD extends SQLiteOpenHelper {
         values.put("nome", lista.getNome());
 
         String[] args = {lista.getId().toString()};
-        getWritableDatabase().update("lista", values, "idLista=?",args);
+        dao.getWritableDatabase().update("lista", values, "idLista=?",args);
     }
 
     public void deletarLista(Lista lista) {
         String[] args = {lista.getId().toString()};
-        getWritableDatabase().delete("lista", "idLista=?", args);
+        dao.getWritableDatabase().delete("lista", "idLista=?", args);
     }
 
     public ArrayList<Lista> getLista() {
         String [] colunas ={"idLista","nome"};
-        Cursor cursor = getWritableDatabase().query("lista", colunas, null, null, null,null,null);
+        Cursor cursor = dao.getWritableDatabase().query("lista", colunas, null, null, null,null,null);
         ArrayList<Lista> arrayLista = new ArrayList<Lista>();
 
         while(cursor.moveToNext()) {

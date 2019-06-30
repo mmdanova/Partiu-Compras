@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
         Button btnIncluirLista = (Button) findViewById(R.id.btnIncluirLista);
         registerForContextMenu(listagemListas);
 
-        //
+        // Ao dar um clique longo, pegar o id
         listagemListas.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity
             public boolean onMenuItemClick(MenuItem item) {
                 bdHelperLista = new ListaBD(MainActivity.this);
                 bdHelperLista.deletarLista(lista);
-                bdHelperLista.close();
+                //bdHelperLista.close();
                 carregarLista();
                 return true;
             }
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity
     public void carregarLista() {
         bdHelperLista = new ListaBD(MainActivity.this);
         listas = bdHelperLista.getLista();
-        bdHelperLista.close();
+        //bdHelperLista.close();
         if (listas != null) {
             arrayAdapter = new ArrayAdapter<Lista>(MainActivity.this, android.R.layout.simple_list_item_1, listas);
             listagemListas.setAdapter(arrayAdapter);
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_produtos) {
             Intent intencao = new Intent(MainActivity.this, ListarProduto.class);
             //Erro ao listar os produtos. Necessario verificar
-            //startActivity(intencao);
+            startActivity(intencao);
         } else if (id == R.id.nav_historico_compras) {
 
         }

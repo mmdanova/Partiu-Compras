@@ -2,9 +2,6 @@ package com.example.partiucompras;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -14,10 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-
-import com.example.partiucompras.BDHelper.ListaBD;
 import com.example.partiucompras.BDHelper.ProdutoBD;
-import com.example.partiucompras.model.Lista;
 import com.example.partiucompras.model.Produto;
 
 import java.util.ArrayList;
@@ -82,7 +76,7 @@ public class ListarProduto extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem item) {
                 bdHelperProduto = new ProdutoBD(ListarProduto.this);
                 bdHelperProduto.deletarProduto(produto);
-                bdHelperProduto.close();
+                //bdHelperProduto.close();
                 carregarProdutos();
                 return true;
             }
@@ -100,7 +94,7 @@ public class ListarProduto extends AppCompatActivity {
     public void carregarProdutos() {
         bdHelperProduto = new ProdutoBD(ListarProduto.this);
         arrayListProdutos = bdHelperProduto.getProduto();
-        bdHelperProduto.close();
+        //bdHelperProduto.close();
         if (arrayListProdutos != null) {
             arrayAdapter = new ArrayAdapter<Produto>(ListarProduto.this, android.R.layout.simple_list_item_1, arrayListProdutos);
             listViewListagemProdutos.setAdapter(arrayAdapter);
