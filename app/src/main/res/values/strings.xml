@@ -16,7 +16,9 @@
     <string name="menu_listas">Listas</string>
     <string name="menu_produtos">Produtos</string>
     <string name="menu_historico_compras">Histórico de Compras</string>
-    <string name="title_activity_listar_produto">ListarProduto</string>
+    <string name="title_activity_listar_produto">Produtos</string>
+    <string name="title_activity_produtos_da_lista">Produtos da Lista</string>
+    <string name="title_activity_adicionar_produtos_da_lista">Adicionar Produtos na Lista</string>
 
 
 </resources>

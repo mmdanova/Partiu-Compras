@@ -51,6 +51,17 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        // Abrindo a tela para listar os produtos da lista
+        listagemListas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+                Lista listaEscolhida = (Lista) adapter.getItemAtPosition(position);
+                Intent i = new Intent(MainActivity.this, ProdutosDaLista.class);
+                i.putExtra("lista_escolhida", listaEscolhida);
+                startActivity(i);
+            }
+        });
+
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -112,8 +123,10 @@ public class MainActivity extends AppCompatActivity
     //Lista as listas
     public void carregarLista() {
         bdHelperLista = new ListaBD(MainActivity.this);
+        // pega todas as listas que tem cadastradas no BD e adiciona em um ArrayList
         listas = bdHelperLista.getLista();
         //bdHelperLista.close();
+        //Verifica se tem valores dentro do ArrayList
         if (listas != null) {
             arrayAdapter = new ArrayAdapter<Lista>(MainActivity.this, android.R.layout.simple_list_item_1, listas);
             listagemListas.setAdapter(arrayAdapter);

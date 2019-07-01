@@ -3,8 +3,11 @@ package com.example.partiucompras.BDHelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
 import com.example.partiucompras.model.Lista;
+import com.example.partiucompras.model.Produto;
+
 import java.util.ArrayList;
 
 public class ListaBD {
@@ -50,6 +53,25 @@ public class ListaBD {
             lista.setId(cursor.getLong(0));
             lista.setNome(cursor.getString(1));
             arrayLista.add(lista);
+        }
+        return arrayLista;
+    }
+
+    public ArrayList<Produto> getProdutosDaLista(Integer listaSelecionada) {
+        String [] colunas ={listaSelecionada.toString()};
+        Cursor cursor = banco.rawQuery("SELECT * FROM LISTA_PRODUTO LP" +
+                "INNER JOIN PRODUTO P ON P.idProduto = LP.idProduto" +
+                "WHERE LP.idLista ="+listaSelecionada, null);
+        cursor.moveToFirst();
+
+        //
+        ArrayList<Produto> arrayLista = new ArrayList<Produto>();
+
+        while(cursor.moveToNext()) {
+            Produto produto = new Produto();
+            produto.setId(cursor.getLong(0));
+            produto.setNome(cursor.getString(1));
+            arrayLista.add(produto);
         }
         return arrayLista;
     }
