@@ -49,18 +49,6 @@ public class ListarProduto extends AppCompatActivity {
             }
         });
 
-
-        // Abrindo a tela para modificar o produto
-        listViewListagemProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Produto produtoEscolhido = (Produto) adapter.getItemAtPosition(position);
-                Intent i = new Intent(ListarProduto.this, FormularioProdutos.class);
-                i.putExtra("produto_escolhido", produtoEscolhido);
-                startActivity(i);
-            }
-        });
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

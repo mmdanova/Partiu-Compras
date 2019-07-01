@@ -51,17 +51,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        // Abrindo a tela para modificar o item da lista
-        listagemListas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-                Lista listaEscolhida = (Lista) adapter.getItemAtPosition(position);
-                Intent i = new Intent(MainActivity.this, ListaActivity.class);
-                i.putExtra("lista_escolhida", listaEscolhida);
-                startActivity(i);
-            }
-        });
-
         // Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
