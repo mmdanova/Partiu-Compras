@@ -2,6 +2,10 @@ package com.example.partiucompras;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
@@ -33,7 +37,6 @@ public class ListarProduto extends AppCompatActivity {
 
         //Pegando as view
         listViewListagemProdutos = (ListView) findViewById(R.id.idListagemProdutos);
-        Button btnIncluirProduto = (Button) findViewById(R.id.btnIncluirProduto);
         registerForContextMenu(listViewListagemProdutos);
 
         //
@@ -45,13 +48,6 @@ public class ListarProduto extends AppCompatActivity {
             }
         });
 
-        // Ao clicar no botão de Incluir, o método abaixo é executado.
-        btnIncluirProduto.setOnClickListener(new android.view.View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(ListarProduto.this, FormularioProdutos.class);
-                startActivity(intent);
-            }
-        });
 
         // Abrindo a tela para modificar o produto
         listViewListagemProdutos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -61,6 +57,15 @@ public class ListarProduto extends AppCompatActivity {
                 Intent i = new Intent(ListarProduto.this, FormularioProdutos.class);
                 i.putExtra("produto_escolhido", produtoEscolhido);
                 startActivity(i);
+            }
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ListarProduto.this, FormularioProdutos.class);
+                startActivity(intent);
             }
         });
 

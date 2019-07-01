@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity
 
         //Pegando as view
         listagemListas = (ListView) findViewById(R.id.idListagemListas);
-        Button btnIncluirLista = (Button) findViewById(R.id.btnIncluirLista);
         registerForContextMenu(listagemListas);
 
         // Ao dar um clique longo, pegar o id
@@ -49,14 +48,6 @@ public class MainActivity extends AppCompatActivity
             public boolean onItemLongClick(AdapterView<?> adapter, View view, int position, long id) {
                 lista = (Lista) adapter.getItemAtPosition(position);
                 return false;
-            }
-        });
-
-        // Ao clicar no botão de Incluir, o método abaixo é executado.
-        btnIncluirLista.setOnClickListener(new android.view.View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListaActivity.class);
-                startActivity(intent);
             }
         });
 
@@ -78,9 +69,8 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivityForResult( new Intent(this, ListaActivity.class), 1);
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
+                Intent intent = new Intent(MainActivity.this, ListaActivity.class);
+                startActivity(intent);
             }
         });
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
