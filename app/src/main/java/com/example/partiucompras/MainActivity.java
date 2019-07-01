@@ -85,6 +85,7 @@ public class MainActivity extends AppCompatActivity
     //Deleta a lista selecionada com o clique longo
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem menuEditar = menu.add("Editar esta lista");
         MenuItem menuDelete = menu.add("Deletar esta lista");
 
         menuDelete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -94,6 +95,19 @@ public class MainActivity extends AppCompatActivity
                 bdHelperLista.deletarLista(lista);
                 //bdHelperLista.close();
                 carregarLista();
+                return true;
+            }
+        });
+
+        menuEditar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+                final Lista listaEscolhida = listas.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
+                Intent i = new Intent(MainActivity.this, ListaActivity.class);
+                i.putExtra("lista_escolhida", listaEscolhida);
+                startActivity(i);
                 return true;
             }
         });

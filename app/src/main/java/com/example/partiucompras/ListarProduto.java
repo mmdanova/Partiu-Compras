@@ -9,6 +9,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -74,6 +75,7 @@ public class ListarProduto extends AppCompatActivity {
     //Deleta o produto selecionado com o clique longo
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        MenuItem menuEditar = menu.add("Editar este produto");
         MenuItem menuDelete = menu.add("Deletar este produto");
 
         menuDelete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -86,6 +88,20 @@ public class ListarProduto extends AppCompatActivity {
                 return true;
             }
         });
+
+        menuEditar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+                final Produto produtoEscolhido = arrayListProdutos.get(((AdapterView.AdapterContextMenuInfo) item.getMenuInfo()).position);
+                Intent i = new Intent(ListarProduto.this, FormularioProdutos.class);
+                i.putExtra("produto_escolhido", produtoEscolhido);
+                startActivity(i);
+                return true;
+            }
+        });
+
 
     }
 

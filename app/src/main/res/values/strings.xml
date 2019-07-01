@@ -1,6 +1,6 @@
 <resources>
     <!--Genéricos-->
-    <string name="app_name">PartiuCompras</string>
+    <string name="app_name">Partiu Compras</string>
     <string name="cancelar">Cancelar</string>
     <string name="salvar">Salvar</string>
     <string name="nav_header_title">Partiu Compras</string>
